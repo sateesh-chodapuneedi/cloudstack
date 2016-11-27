@@ -37,6 +37,8 @@ INSERT IGNORE INTO `cloud`.`guest_os_hypervisor` (uuid, hypervisor_type, hypervi
 INSERT IGNORE INTO `cloud`.`guest_os_hypervisor` (uuid, hypervisor_type, hypervisor_version, guest_os_name, guest_os_id, created) VALUES (UUID(), 'KVM', 'default', 'Windows 10', 258, now());
 INSERT IGNORE INTO `cloud`.`guest_os_hypervisor` (uuid, hypervisor_type, hypervisor_version, guest_os_name, guest_os_id, created) VALUES (UUID(), 'KVM', 'default', 'Windows Server 2012', 259, now());
 
+UPDATE IGNORE `cloud`.`guest_os_hypervisor` SET guest_os_name = 'windows7Server64Guest' WHERE guest_os_id IN (SELECT id FROM guest_os WHERE display_name LIKE 'windows%2008%r2%64%') AND hypervisor_type = 'VMware' AND hypervisor_version != 'default';
+
 CREATE TABLE `cloud`.`vlan_details` (
   `id` bigint unsigned NOT NULL auto_increment,
   `vlan_id` bigint unsigned NOT NULL COMMENT 'vlan id',
